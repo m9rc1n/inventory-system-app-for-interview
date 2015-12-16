@@ -72,4 +72,27 @@ public class InventorySystemTest {
             }
         }
     }
+
+    @Test
+    public void testGoldShouldNotDecreaseInQualityAndNeverHasToBeSold() throws Exception {
+        for (int i = 0; i < NIGHTS; i++) {
+            int prevQuality = 0;
+            for (Item item : InventorySystem.getItems()) {
+                if ("Gold".equals(item.getName())) {
+                    prevQuality = item.getQuality();
+                    break;
+                }
+            }
+
+            InventorySystem.updateQuality();
+
+            for (Item item : InventorySystem.getItems()) {
+                if ("Gold".equals(item.getName())) {
+                    Assert.assertTrue(item.getQuality() >= prevQuality);
+                    Assert.assertTrue(0 == item.getSellIn());
+                    break;
+                }
+            }
+        }
+    }
 }
