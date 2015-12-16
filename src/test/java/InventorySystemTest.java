@@ -36,4 +36,18 @@ public class InventorySystemTest {
             Assert.assertTrue(item.getQuality() >= 0);
         }
     }
+
+    @Test
+    public void testQualityShouldNotBeBiggerThanSpecified() throws Exception {
+        for (int i = 0; i < NIGHTS; i++) {
+            InventorySystem.updateQuality();
+        }
+        for (Item item : InventorySystem.getItems()) {
+            if ("Gold".equals(item.getName())) {
+                Assert.assertTrue(item.getQuality() <= 80);
+            } else {
+                Assert.assertTrue(item.getQuality() <= 50);
+            }
+        }
+    }
 }
