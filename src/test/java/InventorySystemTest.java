@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 
-
 public class InventorySystemTest {
 
+    public static final int NIGHTS = 100;
 
-	@Test
-	public void testJunit() {
-		assertTrue(true);
-	}
+    @Test
+    public void testJunit() {
+        assertTrue(true);
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -29,9 +29,11 @@ public class InventorySystemTest {
 
     @Test
     public void testQualityShouldNotBeNeverNegative() throws Exception {
-        InventorySystem.updateQuality();
+        for (int i = 0; i < NIGHTS; i++) {
+            InventorySystem.updateQuality();
+        }
         for (Item item : InventorySystem.getItems()) {
-            Assert.assertTrue(item.getQuality() > 0);
+            Assert.assertTrue(item.getQuality() >= 0);
         }
     }
 }
