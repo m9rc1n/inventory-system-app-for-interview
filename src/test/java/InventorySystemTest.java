@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,5 +25,13 @@ public class InventorySystemTest {
         items.add(new Item("Concert Ticket", 15, 20));
         items.add(new Item("Chocolate Eclair", 3, 6));
         InventorySystem.setItems(items);
+    }
+
+    @Test
+    public void testQualityShouldNotBeNeverNegative() throws Exception {
+        InventorySystem.updateQuality();
+        for (Item item : InventorySystem.getItems()) {
+            Assert.assertTrue(item.getQuality() > 0);
+        }
     }
 }
