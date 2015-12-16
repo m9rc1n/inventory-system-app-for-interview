@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -143,6 +144,29 @@ public class InventorySystemTest {
             for (Item item : InventorySystem.getItems()) {
                 if ("Freshly baked bread".equals(item.getName())) {
                     Assert.assertTrue(item.getQuality() == prevQuality + 2);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testOnceTheSellByDateHasPassed() throws Exception {
+        for (int i = 0; i < NIGHTS; i++) {
+            List<Item> prevItems = new ArrayList<Item>();
+            for (Item item : InventorySystem.getItems()) {
+                prevItems.add(new Item(item.getName(), item.getSellIn(), item.getQuality()));
+            }
+            InventorySystem.updateQuality();
+            for (Item item : InventorySystem.getItems()) {
+                if ("Wine".equals(item.getName())) continue;
+                if ("Gold".equals(item.getName())) continue;
+                if ("Concert Ticket".equals(item.getName())) continue;
+                if (item.getSellIn() < 0) {
+                    for (Item prevItem : prevItems) {
+                        if (item.getName().equals(prevItem.getName())) {
+                            Assert.assertTrue(item.getQuality() == 0 || item.getQuality() == prevItem.getQuality() - 2);
+                        }
+                    }
                 }
             }
         }
