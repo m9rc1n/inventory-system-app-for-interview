@@ -95,4 +95,34 @@ public class InventorySystemTest {
             }
         }
     }
+
+    @Test
+    public void testConcertTicketShouldIncreaseInQuality() throws Exception {
+        for (int i = 0; i < NIGHTS; i++) {
+            int prevQuality = 0;
+
+            for (Item item : InventorySystem.getItems()) {
+                if ("Concert Ticket".equals(item.getName())) {
+                    prevQuality = item.getQuality();
+                    break;
+                }
+            }
+
+            InventorySystem.updateQuality();
+
+            for (Item item : InventorySystem.getItems()) {
+                if ("Concert Ticket".equals(item.getName())) {
+                    if (item.getSellIn() < 0) {
+                        Assert.assertTrue(item.getQuality() == 0);
+                    } else if (item.getSellIn() < 5) {
+                        Assert.assertTrue(item.getQuality() == prevQuality + 3);
+                    } else if (item.getSellIn() < 10) {
+                        Assert.assertTrue(item.getQuality() == prevQuality + 2);
+                    } else {
+                        Assert.assertTrue(item.getQuality() == prevQuality + 1);
+                    }
+                }
+            }
+        }
+    }
 }
