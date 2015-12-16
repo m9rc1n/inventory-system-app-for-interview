@@ -50,4 +50,26 @@ public class InventorySystemTest {
             }
         }
     }
+
+    @Test
+    public void testWineShouldIncreaseInQualityTheOlderItIs() throws Exception {
+        for (int i = 0; i < NIGHTS; i++) {
+            int prevQuality = 0;
+            for (Item item : InventorySystem.getItems()) {
+                if ("Wine".equals(item.getName())) {
+                    prevQuality = item.getQuality();
+                    break;
+                }
+            }
+
+            InventorySystem.updateQuality();
+
+            for (Item item : InventorySystem.getItems()) {
+                if ("Wine".equals(item.getName())) {
+                    Assert.assertTrue(prevQuality < item.getQuality() || item.getQuality() == 50);
+                    break;
+                }
+            }
+        }
+    }
 }
