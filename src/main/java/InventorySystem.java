@@ -3,15 +3,15 @@ import java.util.List;
 
 public class InventorySystem {
 
-	private static List<Item> items = null;
+    private static List<Item> items = null;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
         System.out.println("Starting the Inventory System");
-		
+
         items = new ArrayList<Item>();
         items.add(new Item("School Uniform", 10, 20));
         items.add(new Item("Wine", 2, 0));
@@ -99,4 +99,11 @@ public class InventorySystem {
         }
     }
 
+    public static List<Item> getItems() {
+        return items;
+    }
+
+    public static void setItems(List<Item> items) {
+        InventorySystem.items = items;
+    }
 }
