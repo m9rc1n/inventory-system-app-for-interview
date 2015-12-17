@@ -26,49 +26,7 @@ public class InventorySystem {
     public static void updateQuality() {
 
         for (StrategyItem item : items) {
-            if ("Concert Ticket".equals(item.getName())) {
-                item.updateQuality();
-                continue;
-            }
-            if ("Wine".equals(item.getName())) {
-                item.updateQuality();
-                continue;
-            }
-            if ("Gold".equals(item.getName())) {
-                item.updateQuality();
-                continue;
-            }
-            if ((!"Wine".equals(item.getName())) && !"Concert Ticket".equals(item.getName())) {
-                if (item.getQuality() > 0) {
-                    if (!"Gold".equals(item.getName())) {
-                        item.updateQuality();
-                    }
-                }
-            } else {
-                if (item.getQuality() < 50) {
-                    item.setQuality(item.getQuality() + 1);
-                }
-            }
-
-            if (!"Gold".equals(item.getName())) {
-                item.setSellIn(item.getSellIn() - 1);
-            }
-
-            if (item.getSellIn() < 0) {
-                if (!"Wine".equals(item.getName())) {
-                    if (!"Concert Ticket".equals(item.getName())) {
-                        if (item.getQuality() > 0) {
-                            if (!"Gold".equals(item.getName())) {
-                                item.setQuality(item.getQuality() - 1);
-                            }
-                        }
-                    }
-                } else {
-                    if (item.getQuality() < 50) {
-                        item.setQuality(item.getQuality() + 1);
-                    }
-                }
-            }
+            item.updateQuality();
         }
     }
 
