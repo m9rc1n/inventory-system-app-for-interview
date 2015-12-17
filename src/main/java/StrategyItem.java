@@ -1,3 +1,5 @@
+import strategies.QualityStrategy;
+
 /**
  * Created by Marcin on 2015-12-17.
  */

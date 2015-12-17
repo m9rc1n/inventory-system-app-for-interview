@@ -1,3 +1,8 @@
+import strategies.ConcertTicketQualityStrategy;
+import strategies.GoldQualityStrategy;
+import strategies.SimpleQualityStrategy;
+import strategies.WineQualityStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 

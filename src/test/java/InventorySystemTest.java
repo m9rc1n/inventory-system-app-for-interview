@@ -1,6 +1,10 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import strategies.ConcertTicketQualityStrategy;
+import strategies.GoldQualityStrategy;
+import strategies.SimpleQualityStrategy;
+import strategies.WineQualityStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
