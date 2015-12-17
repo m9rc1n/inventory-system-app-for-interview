@@ -3,7 +3,7 @@ import java.util.List;
 
 public class InventorySystem {
 
-    private static List<Item> items = null;
+    private static List<StrategyItem> items = null;
 
 	/**
 	 * @param args
@@ -12,20 +12,20 @@ public class InventorySystem {
 
         System.out.println("Starting the Inventory System");
 
-        items = new ArrayList<Item>();
-        items.add(new Item("School Uniform", 10, 20));
-        items.add(new Item("Wine", 2, 0));
-        items.add(new Item("Poultry", 5, 7));
-        items.add(new Item("Gold", 0, 80));
-        items.add(new Item("Concert Ticket", 15, 20));
-        items.add(new Item("Chocolate Eclair", 3, 6));
+        items = new ArrayList<StrategyItem>();
+        items.add(new StrategyItem("School Uniform", 10, 20, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Wine", 2, 0, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Poultry", 5, 7, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Gold", 0, 80, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Concert Ticket", 15, 20, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Chocolate Eclair", 3, 6, new SimpleQualityStrategy()));
 
         updateQuality();
     }
 
     public static void updateQuality() {
 
-        for (Item item : items) {
+        for (StrategyItem item : items) {
             if ((!"Wine".equals(item.getName())) && !"Concert Ticket".equals(item.getName())) {
                 if (item.getQuality() > 0) {
                     if (!"Gold".equals(item.getName())) {
@@ -76,11 +76,11 @@ public class InventorySystem {
         }
     }
 
-    public static List<Item> getItems() {
+    public static List<StrategyItem> getItems() {
         return items;
     }
 
-    public static void setItems(List<Item> items) {
+    public static void setItems(List<StrategyItem> items) {
         InventorySystem.items = items;
     }
 }
