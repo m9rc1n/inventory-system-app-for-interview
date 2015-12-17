@@ -15,11 +15,6 @@ public class InventorySystemTest {
 
     public static final int NIGHTS = 100;
 
-    @Test
-    public void testJunit() {
-        assertTrue(true);
-    }
-
     @Before
     public void setUp() throws Exception {
         ArrayList<StrategyItem> items = new ArrayList<StrategyItem>();
