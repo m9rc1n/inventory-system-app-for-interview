@@ -13,7 +13,7 @@ public class SimpleQualityStrategy implements QualityStrategy {
         } else {
             result = quality - 1;
         }
-        return result > 0 ? result : 0;
+        return result > MINIMUM_QUALITY ? result : MINIMUM_QUALITY;
     }
 
     @Override

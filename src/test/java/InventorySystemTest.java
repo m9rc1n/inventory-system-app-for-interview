@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static strategies.GoldQualityStrategy.GOLD_MAXIMUM_QUALITY;
+import static strategies.QualityStrategy.MAXIMUM_QUALITY;
+import static strategies.QualityStrategy.MINIMUM_QUALITY;
 
 public class InventorySystemTest {
 
@@ -36,7 +39,7 @@ public class InventorySystemTest {
             InventorySystem.updateQuality();
         }
         for (StrategyItem item : InventorySystem.getItems()) {
-            Assert.assertTrue(item.getQuality() >= 0);
+            Assert.assertTrue(item.getQuality() >= MINIMUM_QUALITY);
         }
     }
 
@@ -47,9 +50,9 @@ public class InventorySystemTest {
         }
         for (StrategyItem item : InventorySystem.getItems()) {
             if (item.getStrategy() instanceof GoldQualityStrategy) {
-                Assert.assertTrue(item.getQuality() <= 80);
+                Assert.assertTrue(item.getQuality() <= GOLD_MAXIMUM_QUALITY);
             } else {
-                Assert.assertTrue(item.getQuality() <= 50);
+                Assert.assertTrue(item.getQuality() <= MAXIMUM_QUALITY);
             }
         }
     }
@@ -69,7 +72,7 @@ public class InventorySystemTest {
 
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof WineQualityStrategy) {
-                    Assert.assertTrue(prevQuality < item.getQuality() || item.getQuality() == 50);
+                    Assert.assertTrue(prevQuality < item.getQuality() || item.getQuality() == MAXIMUM_QUALITY);
                     break;
                 }
             }
@@ -116,7 +119,7 @@ public class InventorySystemTest {
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof ConcertTicketQualityStrategy) {
                     if (item.getSellIn() < 0) {
-                        Assert.assertTrue(item.getQuality() == 0);
+                        Assert.assertTrue(item.getQuality() == MINIMUM_QUALITY);
                     } else if (item.getSellIn() < 5) {
                         Assert.assertTrue(item.getQuality() == prevQuality + 3);
                     } else if (item.getSellIn() < 10) {
@@ -146,9 +149,9 @@ public class InventorySystemTest {
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof FreshBackedBreadQualityStrategy) {
                     if (item.getSellIn() < 0) {
-                        Assert.assertTrue(item.getQuality() == 0 || item.getQuality() == prevQuality - 4);
+                        Assert.assertTrue(item.getQuality() == MINIMUM_QUALITY || item.getQuality() == prevQuality - 4);
                     } else {
-                        Assert.assertTrue(item.getQuality() == 0 || item.getQuality() == prevQuality - 2);
+                        Assert.assertTrue(item.getQuality() == MINIMUM_QUALITY || item.getQuality() == prevQuality - 2);
                     }
                 }
             }
@@ -171,7 +174,7 @@ public class InventorySystemTest {
                 if (item.getStrategy().getClass().equals(SimpleQualityStrategy.class) && item.getSellIn() < 0) {
                     for (StrategyItem prevItem : prevItems) {
                         if (item.getName().equals(prevItem.getName())) {
-                            Assert.assertTrue(item.getQuality() == 0
+                            Assert.assertTrue(item.getQuality() == MINIMUM_QUALITY
                                 || item.getQuality() == prevItem.getQuality() - 2);
                         }
                     }

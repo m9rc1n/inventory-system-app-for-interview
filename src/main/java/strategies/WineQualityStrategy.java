@@ -7,7 +7,7 @@ public class WineQualityStrategy extends SimpleQualityStrategy {
 
     @Override
     public int countNewQuality(int sellIn, int quality) {
-        if (quality < 50) {
+        if (quality < MAXIMUM_QUALITY) {
             return quality + 1;
         } else {
             return quality;

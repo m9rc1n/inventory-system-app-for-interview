@@ -5,14 +5,16 @@ package strategies;
  */
 public class GoldQualityStrategy extends SimpleQualityStrategy {
 
+    public static final int GOLD_MAXIMUM_QUALITY = 80;
+
     @Override
     public int countNewQuality(int sellIn, int quality) {
-        if (quality < 0) {
-            return 0;
-        } else if (quality < 80) {
+        if (quality < MINIMUM_QUALITY) {
+            return MINIMUM_QUALITY;
+        } else if (quality < GOLD_MAXIMUM_QUALITY) {
             return quality;
         } else {
-            return 80;
+            return GOLD_MAXIMUM_QUALITY;
         }
     }
 

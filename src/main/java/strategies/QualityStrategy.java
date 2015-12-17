@@ -5,6 +5,10 @@ package strategies;
  */
 public interface QualityStrategy {
 
+    int MINIMUM_QUALITY = 0;
+
+    int MAXIMUM_QUALITY = 50;
+
     int countNewQuality(int sellIn, int quality);
 
     int countNewSellIn(int sellIn);
