@@ -1,7 +1,7 @@
 /**
  * Created by Marcin on 2015-12-17.
  */
-public class ConcertTicketQualityStrategy implements QualityStrategy {
+public class ConcertTicketQualityStrategy extends SimpleQualityStrategy {
 
     @Override
     public int countNewQuality(int sellIn, int quality) {

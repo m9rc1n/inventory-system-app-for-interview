@@ -1,7 +1,7 @@
 /**
  * Created by Marcin on 2015-12-17.
  */
-public class WineQualityStrategy implements QualityStrategy {
+public class WineQualityStrategy extends SimpleQualityStrategy {
 
     @Override
     public int countNewQuality(int sellIn, int quality) {

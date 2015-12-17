@@ -21,7 +21,7 @@ public class StrategyItem extends Item implements Cloneable {
     }
 
     public void updateQuality() {
-        setSellIn(getSellIn() - 1);
+        setSellIn(strategy.countNewSellIn(getSellIn()));
         setQuality(strategy.countNewQuality(getSellIn(), getQuality()));
     }
 }

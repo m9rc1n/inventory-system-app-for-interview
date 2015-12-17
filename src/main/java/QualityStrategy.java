@@ -4,4 +4,6 @@
 public interface QualityStrategy {
 
     int countNewQuality(int sellIn, int quality);
+
+    int countNewSellIn(int sellIn);
 }
