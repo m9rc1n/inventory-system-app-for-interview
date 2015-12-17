@@ -17,7 +17,7 @@ public class InventorySystem {
         items.add(new StrategyItem("Wine", 2, 0, new SimpleQualityStrategy()));
         items.add(new StrategyItem("Poultry", 5, 7, new SimpleQualityStrategy()));
         items.add(new StrategyItem("Gold", 0, 80, new SimpleQualityStrategy()));
-        items.add(new StrategyItem("Concert Ticket", 15, 20, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Concert Ticket", 15, 20, new ConcertTicketQualityStrategy()));
         items.add(new StrategyItem("Chocolate Eclair", 3, 6, new SimpleQualityStrategy()));
 
         updateQuality();
@@ -26,6 +26,10 @@ public class InventorySystem {
     public static void updateQuality() {
 
         for (StrategyItem item : items) {
+            if ("Concert Ticket".equals(item.getName())) {
+                item.updateQuality();
+                continue;
+            }
             if ((!"Wine".equals(item.getName())) && !"Concert Ticket".equals(item.getName())) {
                 if (item.getQuality() > 0) {
                     if (!"Gold".equals(item.getName())) {
@@ -35,20 +39,6 @@ public class InventorySystem {
             } else {
                 if (item.getQuality() < 50) {
                     item.setQuality(item.getQuality() + 1);
-
-                    if ("Concert Ticket".equals(item.getName())) {
-                        if (item.getSellIn() < 11) {
-                            if (item.getQuality() < 50) {
-                                item.setQuality(item.getQuality() + 1);
-                            }
-                        }
-
-                        if (item.getSellIn() < 6) {
-                            if (item.getQuality() < 50) {
-                                item.setQuality(item.getQuality() + 1);
-                            }
-                        }
-                    }
                 }
             }
 
@@ -64,8 +54,6 @@ public class InventorySystem {
                                 item.setQuality(item.getQuality() - 1);
                             }
                         }
-                    } else {
-                        item.setQuality(item.getQuality() - item.getQuality());
                     }
                 } else {
                     if (item.getQuality() < 50) {
