@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.StreamHandler;
 
 import static org.junit.Assert.assertTrue;
 
@@ -155,7 +154,11 @@ public class InventorySystemTest {
         for (int i = 0; i < NIGHTS; i++) {
             List<StrategyItem> prevItems = new ArrayList<StrategyItem>();
             for (StrategyItem item : InventorySystem.getItems()) {
-                prevItems.add(new StrategyItem(item.getName(), item.getSellIn(), item.getQuality(), item.getStrategy()));
+                try {
+                    prevItems.add(item.clone());
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
             }
             InventorySystem.updateQuality();
             for (StrategyItem item : InventorySystem.getItems()) {
