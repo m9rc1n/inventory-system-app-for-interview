@@ -135,7 +135,7 @@ public class InventorySystemTest {
             int prevQuality = 0;
 
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Freshly baked bread".equals(item.getName())) {
+                if (item.getStrategy() instanceof FreshBackedBreadQualityStrategy) {
                     prevQuality = item.getQuality();
                     break;
                 }
@@ -144,8 +144,12 @@ public class InventorySystemTest {
             InventorySystem.updateQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Freshly baked bread".equals(item.getName())) {
-                    Assert.assertTrue(item.getQuality() == prevQuality + 2);
+                if (item.getStrategy() instanceof FreshBackedBreadQualityStrategy) {
+                    if (item.getSellIn() < 0) {
+                        Assert.assertTrue(item.getQuality() == 0 || item.getQuality() == prevQuality - 4);
+                    } else {
+                        Assert.assertTrue(item.getQuality() == 0 || item.getQuality() == prevQuality - 2);
+                    }
                 }
             }
         }
@@ -164,13 +168,11 @@ public class InventorySystemTest {
             }
             InventorySystem.updateQuality();
             for (StrategyItem item : InventorySystem.getItems()) {
-                if (item.getStrategy() instanceof WineQualityStrategy) continue;
-                if (item.getStrategy() instanceof GoldQualityStrategy) continue;
-                if (item.getStrategy() instanceof ConcertTicketQualityStrategy) continue;
-                if (item.getSellIn() < 0) {
+                if (item.getStrategy().getClass().equals(SimpleQualityStrategy.class) && item.getSellIn() < 0) {
                     for (StrategyItem prevItem : prevItems) {
                         if (item.getName().equals(prevItem.getName())) {
-                            Assert.assertTrue(item.getQuality() == 0 || item.getQuality() == prevItem.getQuality() - 2);
+                            Assert.assertTrue(item.getQuality() == 0
+                                || item.getQuality() == prevItem.getQuality() - 2);
                         }
                     }
                 }
