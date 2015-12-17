@@ -14,7 +14,7 @@ public class InventorySystem {
 
         items = new ArrayList<StrategyItem>();
         items.add(new StrategyItem("School Uniform", 10, 20, new SimpleQualityStrategy()));
-        items.add(new StrategyItem("Wine", 2, 0, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Wine", 2, 0, new WineQualityStrategy()));
         items.add(new StrategyItem("Poultry", 5, 7, new SimpleQualityStrategy()));
         items.add(new StrategyItem("Gold", 0, 80, new SimpleQualityStrategy()));
         items.add(new StrategyItem("Concert Ticket", 15, 20, new ConcertTicketQualityStrategy()));
@@ -27,6 +27,10 @@ public class InventorySystem {
 
         for (StrategyItem item : items) {
             if ("Concert Ticket".equals(item.getName())) {
+                item.updateQuality();
+                continue;
+            }
+            if ("Wine".equals(item.getName())) {
                 item.updateQuality();
                 continue;
             }
