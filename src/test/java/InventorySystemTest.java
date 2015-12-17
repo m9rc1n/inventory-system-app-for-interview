@@ -31,7 +31,7 @@ public class InventorySystemTest {
     @Test
     public void testQualityShouldNotBeNeverNegative() throws Exception {
         for (int i = 0; i < NIGHTS; i++) {
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
         }
         for (StrategyItem item : InventorySystem.getItems()) {
             Assert.assertTrue(item.getQuality() >= MINIMUM_QUALITY);
@@ -41,7 +41,7 @@ public class InventorySystemTest {
     @Test
     public void testQualityShouldNotBeBiggerThanSpecified() throws Exception {
         for (int i = 0; i < NIGHTS; i++) {
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
         }
         for (StrategyItem item : InventorySystem.getItems()) {
             if (item.getStrategy() instanceof GoldQualityStrategy) {
@@ -63,7 +63,7 @@ public class InventorySystemTest {
                 }
             }
 
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof WineQualityStrategy) {
@@ -85,7 +85,7 @@ public class InventorySystemTest {
                 }
             }
 
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof GoldQualityStrategy) {
@@ -109,7 +109,7 @@ public class InventorySystemTest {
                 }
             }
 
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof ConcertTicketQualityStrategy) {
@@ -139,7 +139,7 @@ public class InventorySystemTest {
                 }
             }
 
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy() instanceof FreshBackedBreadQualityStrategy) {
@@ -164,7 +164,7 @@ public class InventorySystemTest {
                     e.printStackTrace();
                 }
             }
-            InventorySystem.updateQuality();
+            InventorySystem.updateSellInAndQuality();
             for (StrategyItem item : InventorySystem.getItems()) {
                 if (item.getStrategy().getClass().equals(SimpleQualityStrategy.class) && item.getSellIn() < 0) {
                     for (StrategyItem prevItem : prevItems) {

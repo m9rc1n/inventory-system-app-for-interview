@@ -23,13 +23,13 @@ public class InventorySystem {
         items.add(new StrategyItem("Chocolate Eclair", 3, 6, new SimpleQualityStrategy()));
         items.add(new StrategyItem("Fresh Baked Bread", 12, 32, new FreshBackedBreadQualityStrategy()));
 
-        updateQuality();
+        updateSellInAndQuality();
     }
 
-    public static void updateQuality() {
+    public static void updateSellInAndQuality() {
 
         for (StrategyItem item : items) {
-            item.updateQuality();
+            item.updateSellInAndQuality();
         }
     }
 
