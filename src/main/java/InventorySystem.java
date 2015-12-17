@@ -1,7 +1,4 @@
-import strategies.ConcertTicketQualityStrategy;
-import strategies.GoldQualityStrategy;
-import strategies.SimpleQualityStrategy;
-import strategies.WineQualityStrategy;
+import strategies.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +21,7 @@ public class InventorySystem {
         items.add(new StrategyItem("Gold", 0, 80, new GoldQualityStrategy()));
         items.add(new StrategyItem("Concert Ticket", 15, 20, new ConcertTicketQualityStrategy()));
         items.add(new StrategyItem("Chocolate Eclair", 3, 6, new SimpleQualityStrategy()));
+        items.add(new StrategyItem("Fresh Baked Bread", 12, 32, new FreshBackedBreadQualityStrategy()));
 
         updateQuality();
     }
