@@ -29,7 +29,7 @@ public class InventorySystem {
             if ((!"Wine".equals(item.getName())) && !"Concert Ticket".equals(item.getName())) {
                 if (item.getQuality() > 0) {
                     if (!"Gold".equals(item.getName())) {
-                        item.setQuality(item.getQuality() - 1);
+                        item.updateQuality();
                     }
                 }
             } else {

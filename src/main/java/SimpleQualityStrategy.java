@@ -4,7 +4,7 @@
 public class SimpleQualityStrategy implements QualityStrategy {
 
     @Override
-    public void updateQuality() {
-
+    public int countNewQuality(int sellIn, int quality) {
+        return quality - 1;
     }
 }

@@ -3,5 +3,5 @@
  */
 public interface QualityStrategy {
 
-    void updateQuality();
+    int countNewQuality(int sellIn, int quality);
 }
