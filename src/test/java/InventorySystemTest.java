@@ -44,7 +44,7 @@ public class InventorySystemTest {
             InventorySystem.updateQuality();
         }
         for (StrategyItem item : InventorySystem.getItems()) {
-            if ("Gold".equals(item.getName())) {
+            if (item.getStrategy() instanceof GoldQualityStrategy) {
                 Assert.assertTrue(item.getQuality() <= 80);
             } else {
                 Assert.assertTrue(item.getQuality() <= 50);
@@ -57,7 +57,7 @@ public class InventorySystemTest {
         for (int i = 0; i < NIGHTS; i++) {
             int prevQuality = 0;
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Wine".equals(item.getName())) {
+                if (item.getStrategy() instanceof WineQualityStrategy) {
                     prevQuality = item.getQuality();
                     break;
                 }
@@ -66,7 +66,7 @@ public class InventorySystemTest {
             InventorySystem.updateQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Wine".equals(item.getName())) {
+                if (item.getStrategy() instanceof WineQualityStrategy) {
                     Assert.assertTrue(prevQuality < item.getQuality() || item.getQuality() == 50);
                     break;
                 }
@@ -79,7 +79,7 @@ public class InventorySystemTest {
         for (int i = 0; i < NIGHTS; i++) {
             int prevQuality = 0;
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Gold".equals(item.getName())) {
+                if (item.getStrategy() instanceof GoldQualityStrategy) {
                     prevQuality = item.getQuality();
                     break;
                 }
@@ -88,7 +88,7 @@ public class InventorySystemTest {
             InventorySystem.updateQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Gold".equals(item.getName())) {
+                if (item.getStrategy() instanceof GoldQualityStrategy) {
                     Assert.assertTrue(item.getQuality() >= prevQuality);
                     Assert.assertTrue(0 == item.getSellIn());
                     break;
@@ -103,7 +103,7 @@ public class InventorySystemTest {
             int prevQuality = 0;
 
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Concert Ticket".equals(item.getName())) {
+                if (item.getStrategy() instanceof ConcertTicketQualityStrategy) {
                     prevQuality = item.getQuality();
                     break;
                 }
@@ -112,7 +112,7 @@ public class InventorySystemTest {
             InventorySystem.updateQuality();
 
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Concert Ticket".equals(item.getName())) {
+                if (item.getStrategy() instanceof ConcertTicketQualityStrategy) {
                     if (item.getSellIn() < 0) {
                         Assert.assertTrue(item.getQuality() == 0);
                     } else if (item.getSellIn() < 5) {
@@ -162,9 +162,9 @@ public class InventorySystemTest {
             }
             InventorySystem.updateQuality();
             for (StrategyItem item : InventorySystem.getItems()) {
-                if ("Wine".equals(item.getName())) continue;
-                if ("Gold".equals(item.getName())) continue;
-                if ("Concert Ticket".equals(item.getName())) continue;
+                if (item.getStrategy() instanceof WineQualityStrategy) continue;
+                if (item.getStrategy() instanceof GoldQualityStrategy) continue;
+                if (item.getStrategy() instanceof ConcertTicketQualityStrategy) continue;
                 if (item.getSellIn() < 0) {
                     for (StrategyItem prevItem : prevItems) {
                         if (item.getName().equals(prevItem.getName())) {
