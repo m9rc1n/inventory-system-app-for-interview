@@ -25,74 +25,51 @@ public class InventorySystem {
 
     public static void updateQuality() {
 
-        for (int i = 0; i < items.size(); i++)
-        {
-            if ((!"Wine".equals(items.get(i).getName())) && !"Concert Ticket".equals(items.get(i).getName()))
-            {
-                if (items.get(i).getQuality() > 0)
-                {
-                    if (!"Gold".equals(items.get(i).getName()))
-                    {
-                        items.get(i).setQuality(items.get(i).getQuality() - 1);
+        for (Item item : items) {
+            if ((!"Wine".equals(item.getName())) && !"Concert Ticket".equals(item.getName())) {
+                if (item.getQuality() > 0) {
+                    if (!"Gold".equals(item.getName())) {
+                        item.setQuality(item.getQuality() - 1);
                     }
                 }
-            }
-            else
-            {
-                if (items.get(i).getQuality() < 50)
-                {
-                    items.get(i).setQuality(items.get(i).getQuality() + 1);
+            } else {
+                if (item.getQuality() < 50) {
+                    item.setQuality(item.getQuality() + 1);
 
-                    if ("Concert Ticket".equals(items.get(i).getName()))
-                    {
-                        if (items.get(i).getSellIn() < 11)
-                        {
-                            if (items.get(i).getQuality() < 50)
-                            {
-                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                    if ("Concert Ticket".equals(item.getName())) {
+                        if (item.getSellIn() < 11) {
+                            if (item.getQuality() < 50) {
+                                item.setQuality(item.getQuality() + 1);
                             }
                         }
 
-                        if (items.get(i).getSellIn() < 6)
-                        {
-                            if (items.get(i).getQuality() < 50)
-                            {
-                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                        if (item.getSellIn() < 6) {
+                            if (item.getQuality() < 50) {
+                                item.setQuality(item.getQuality() + 1);
                             }
                         }
                     }
                 }
             }
 
-            if (!"Gold".equals(items.get(i).getName()))
-            {
-                items.get(i).setSellIn(items.get(i).getSellIn() - 1);
+            if (!"Gold".equals(item.getName())) {
+                item.setSellIn(item.getSellIn() - 1);
             }
 
-            if (items.get(i).getSellIn() < 0)
-            {
-                if (!"Wine".equals(items.get(i).getName()))
-                {
-                    if (!"Concert Ticket".equals(items.get(i).getName()))
-                    {
-                        if (items.get(i).getQuality() > 0)
-                        {
-                            if (!"Gold".equals(items.get(i).getName()))
-                            {
-                                items.get(i).setQuality(items.get(i).getQuality() - 1);
+            if (item.getSellIn() < 0) {
+                if (!"Wine".equals(item.getName())) {
+                    if (!"Concert Ticket".equals(item.getName())) {
+                        if (item.getQuality() > 0) {
+                            if (!"Gold".equals(item.getName())) {
+                                item.setQuality(item.getQuality() - 1);
                             }
                         }
+                    } else {
+                        item.setQuality(item.getQuality() - item.getQuality());
                     }
-                    else
-                    {
-                        items.get(i).setQuality(items.get(i).getQuality() - items.get(i).getQuality());
-                    }
-                }
-                else
-                {
-                    if (items.get(i).getQuality() < 50)
-                    {
-                        items.get(i).setQuality(items.get(i).getQuality() + 1);
+                } else {
+                    if (item.getQuality() < 50) {
+                        item.setQuality(item.getQuality() + 1);
                     }
                 }
             }
